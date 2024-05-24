@@ -1,21 +1,20 @@
 #!/usr/bin/python3
-"""This file will pack the contents of the web_static directory"""
+"""This script is used as a fabfile"""
 
 import os
-from fabric.api import local
 from datetime import datetime
+from fabric.api import local
 
 
 def do_pack():
-    """packs the contents of the web_static directory"""
+    """This fucntion is used as the fabric command to pack the files"""
+    date = datetime.now().strftime("%Y%m%d%H%M%S")
+    file_name = "versions/web_static_{}.tgz".format(date)
     if not os.path.exists("versions"):
-        os.mkdir("versions")
-    archive_time = datetime.now().strftime("%Y%m%d%H%M%S")
-    archive_name = f"web_static_{archive_time}"
-
+        if local("mkdir -p versions").failed is True:
+            return None
     try:
-        local(f"tar -czvf versions/{archive_name}.tar.gz web_static")
-        return f"versions/{archive_name}"
-    except:
-        print("error")
+        local("tar -cvzf {} web_static".format(file_name))
+        return file_name
+    except Exception as e:
         return None
