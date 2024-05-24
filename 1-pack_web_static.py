@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """This file will pack the contents of the web_static directory"""
 
 import os
@@ -15,4 +16,5 @@ def do_pack():
         local(f"tar -czvf versions/{archive_name}.tar.gz web_static")
         return f"versions/{archive_name}"
     except:
+        print("error")
         return None
