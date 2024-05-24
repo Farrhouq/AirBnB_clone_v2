@@ -7,6 +7,7 @@ from datetime import datetime
 
 
 def do_pack():
+    """packs the contents of the web_static directory"""
     if not os.path.exists("versions"):
         os.mkdir("versions")
     archive_time = datetime.now().strftime("%Y%m%d%H%M%S")
