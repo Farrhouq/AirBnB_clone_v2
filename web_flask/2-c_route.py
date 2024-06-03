@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """This module starts a flask application"""
 
-import os
 from flask import Flask
 app = Flask(__name__)
 
